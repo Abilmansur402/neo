@@ -144,4 +144,12 @@ export const api = {
   async maternalScreen(body) { return (await probe()) ? request('/api/maternal/screen', { method: 'POST', body }) : mock.maternalScore(body); },
   async baby() { return (await probe()) ? request('/api/maternal/baby') : mock.BABY_LOG; },
   async babySummary() { return (await probe()) ? request('/api/maternal/baby/summary') : mock.BABY_SUMMARY; },
+  // postpartum self-check; offline it lives only in this tab's memory
+  async checkins() { return (await probe()) ? request('/api/maternal/checkins') : [...offlineCheckins]; },
+  async addCheckin(body) {
+    if (await probe()) return request('/api/maternal/checkins', { method: 'POST', body });
+    const c = { id: `local-${Date.now()}`, ...body, created_at: new Date().toISOString(), urgent: body.flags.length > 0 };
+    offlineCheckins.unshift(c); return c;
+  },
 };
+const offlineCheckins = [];

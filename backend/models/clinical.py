@@ -56,6 +56,19 @@ class BabyEntry(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
 
+class MotherCheckin(Base):
+    """Mother's own postpartum self-check: mood and WHO danger signs. Visible to her only, never to staff or analysts."""
+
+    __tablename__ = "mother_checkins"
+
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    user_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"), index=True)
+    mood: Mapped[int] = mapped_column(Integer)  # 1 (very bad) … 5 (good)
+    flags: Mapped[list] = mapped_column(JSON, default=list)  # keys of DANGER_SIGNS in routers/maternal.py
+    note: Mapped[str] = mapped_column(Text, default="")
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), index=True)
+
+
 class ClinicalTask(Base):
     """Shift task list for NICU doctors ("redline tracker")."""
 

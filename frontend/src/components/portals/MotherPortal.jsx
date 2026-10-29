@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { HeartPulse, Baby, Save, Wind, Utensils, Star } from 'lucide-react';
+import { HeartPulse, Baby, Save, Wind, Utensils, Star, Smile, BookOpen } from 'lucide-react';
+import { Wellbeing, Materials } from '../mother/Wellbeing.jsx';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import Shell from './Shell.jsx';
 import { Card, Badge, Gauge } from '../../lib/ui.jsx';
@@ -76,11 +77,14 @@ function BabyView() {
 export default function MotherPortal({ user, onLogout }) {
   const { t } = useT();
   const [view, setView] = useState('pregnancy');
-  const NAV = [['pregnancy', t('mom.pregnancy'), HeartPulse], ['baby', t('mom.baby'), Baby]];
-  const TITLES = { pregnancy: [t('mom.pregnancy'), t('mom.screen.sub')], baby: [t('mom.baby'), t('mom.diary')] };
+  const NAV = [['pregnancy', t('mom.pregnancy'), HeartPulse], ['baby', t('mom.baby'), Baby], ['wellbeing', t('mom.wellbeing'), Smile], ['materials', t('mom.materials'), BookOpen]];
+  const TITLES = { pregnancy: [t('mom.pregnancy'), t('mom.screen.sub')], baby: [t('mom.baby'), t('mom.diary')], wellbeing: [t('mom.wellbeing'), t('mom.wellbeing.sub')], materials: [t('mom.materials'), t('mom.materials.sub')] };
   return (
     <Shell user={user} portalLabel={t('nav.mother')} nav={NAV} view={view} setView={setView} title={TITLES[view][0]} sub={TITLES[view][1]} onLogout={onLogout} accent="#52708A">
-      {view === 'pregnancy' ? <Pregnancy /> : <BabyView />}
+      {view === 'pregnancy' && <Pregnancy />}
+      {view === 'baby' && <BabyView />}
+      {view === 'wellbeing' && <Wellbeing />}
+      {view === 'materials' && <Materials />}
     </Shell>
   );
 }

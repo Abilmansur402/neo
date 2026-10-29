@@ -1,0 +1,31 @@
+# Automatic HTTPS for the team domain. Caddy obtains and renews Let's Encrypt certificates.
+{
+	email {$ACME_EMAIL}
+}
+
+{$DOMAIN}:{$APP_PORT} {
+	encode gzip zstd
+
+	# API + WebSockets
+	handle /api/* {
+		reverse_proxy backend:8000
+	}
+	handle /docs* {
+		reverse_proxy backend:8000
+	}
+	handle /openapi.json {
+		reverse_proxy backend:8000
+	}
+
+	# Static frontend
+	handle {
+		reverse_proxy frontend:80
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options nosniff
+		X-Frame-Options DENY
+		Referrer-Policy strict-origin-when-cross-origin
+	}
+}

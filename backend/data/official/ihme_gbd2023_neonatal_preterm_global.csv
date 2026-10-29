@@ -1,0 +1,55 @@
+population_group_id,population_group_name,measure_id,measure_name,location_id,location_name,sex_id,sex_name,age_id,age_name,cause_id,cause_name,metric_id,metric_name,year,val,upper,lower
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,1,Number,2017,793709.872033095,902670.954567583,688558.0573513632
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,2,Percent,2017,0.014329102964395705,0.016306746572084675,0.012448731239288208
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,3,Rate,2017,10.450405453266038,11.885044899283546,9.065920849646329
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,1,Number,2016,818776.2614263863,918063.3165472597,722208.5877500677
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,2,Percent,2016,0.014990251103169481,0.016807075637799023,0.013240868261903668
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,3,Rate,2016,10.910782946004483,12.233854411076788,9.623949195783903
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,1,Number,2015,837969.9478159974,941023.5970269026,740808.2374735652
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,2,Percent,2015,0.015583444135286482,0.01753018990695164,0.013784591307007318
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,3,Rate,2015,11.303346735453871,12.69343373370559,9.992735890431772
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,1,Number,2018,763705.5237611346,868989.4826499748,655155.5628589782
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,2,Percent,2018,0.013772561151513159,0.015720047189079118,0.011813163783869965
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,3,Rate,2018,9.939979941078692,11.310299268243531,8.52715209002627
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,1,Number,2021,664553.7075478996,780247.159066186,556937.7937088382
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,2,Percent,2021,0.010079172445856863,0.01184895413560415,0.008443134988486171
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,3,Rate,2021,8.387903197318543,9.848169630079518,7.029590306245013
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,1,Number,2022,644577.3410340117,755483.4473654237,528055.5819735455
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,2,Percent,2022,0.010605799259216434,0.012437487052873805,0.008785384457333815
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,3,Rate,2022,8.062435759176713,9.449660069859151,6.604970320717081
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,1,Number,2020,697595.1245779808,820887.4464434249,589516.0606235627
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,2,Percent,2020,0.011597702843693831,0.013655896902801602,0.009799032524520841
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,3,Rate,2020,8.88676908355122,10.457408492557855,7.509933652382844
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,1,Number,2019,726973.0601607575,839489.5642192081,620008.3022581106
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,2,Percent,2019,0.01317998836392534,0.015245989551089585,0.011234805149496664
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,3,Rate,2019,9.357218005258078,10.805471751320695,7.980423439647361
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,1,Number,2023,623302.5734565497,735006.3124018019,509686.73080031044
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,2,Percent,2023,0.0103820860793081,0.012296999622642909,0.008492335786779614
+1,All Population,1,Deaths,1,Global,3,Both,22,All ages,381,Neonatal preterm birth,3,Rate,2023,7.727695542449387,9.112596748191525,6.319088104849166
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,1,Number,2015,88251154.25132078,98325659.5273241,77729461.72212768
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,2,Percent,2015,0.03349084321280426,0.03778017645196845,0.029595686906765423
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,3,Rate,2015,1190.4166717512674,1326.31131405869,1048.489936536869
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,1,Number,2016,86726064.79054378,96425597.31539756,76003083.73955014
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,2,Percent,2016,0.03275496212727799,0.0370212050730004,0.029093782907313816
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,3,Rate,2016,1155.68722894126,1284.9404804608207,1012.7957892484527
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,1,Number,2018,82128141.2196877,92630701.71463327,70421986.57252909
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,2,Percent,2018,0.031035742580480606,0.035770721174641584,0.02717720597577209
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,3,Rate,2018,1068.9356707823224,1205.6313439203068,916.5746641382029
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,1,Number,2017,84655515.27253276,94387321.59647802,73235661.84478904
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,2,Percent,2017,0.03189814389904079,0.03631311673762217,0.028426903117105613
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,3,Rate,2017,1114.619446759551,1242.7535741799115,964.259595204353
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,1,Number,2022,71978885.88476196,82474243.2677017,62540708.23229857
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,2,Percent,2022,0.025645532364249504,0.03014651031446871,0.0218532402094022
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,3,Rate,2022,900.3188702414889,1031.595816051918,782.2652308060497
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,1,Number,2019,78980855.52671535,89740544.80120172,67430780.0418031
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,2,Percent,2019,0.029985530447328594,0.034737737271492014,0.02605333418580899
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,3,Rate,2019,1016.6003720163167,1155.093479571008,867.9338254655951
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,1,Number,2023,70218510.97224699,81370219.91668971,60636450.79690425
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,2,Percent,2023,0.02511382755584569,0.029228602953720588,0.0211659079990972
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,3,Rate,2023,870.5679991476759,1008.826711963131,751.7697671849143
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,1,Number,2021,73627953.29226534,84955374.0797675,62986273.865961656
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,2,Percent,2021,0.02482046390773652,0.028783626350959848,0.021274065933229523
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,3,Rate,2021,929.3216452151066,1072.2947532750195,795.0038679295168
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,1,Number,2020,76464359.46458489,87034437.74473017,64974104.458254635
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,2,Percent,2020,0.02746277056080141,0.03211389084931363,0.023607581171985182
+1,All Population,2,DALYs (Disability-Adjusted Life Years),1,Global,3,Both,22,All ages,381,Neonatal preterm birth,3,Rate,2020,974.090961565284,1108.7447765952245,827.7148769930926

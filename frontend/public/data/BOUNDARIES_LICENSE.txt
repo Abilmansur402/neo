@@ -1,0 +1,7 @@
+Kazakhstan administrative boundaries
+
+Source: OpenStreetMap-derived ArcGIS Open Data feature layer
+Layer: KAZ_OSM_BORDER_LVL2
+Retrieved: 2026-07-17
+License notice: OpenStreetMap data is available under the Open Data Commons
+Open Database License (ODbL). See https://www.openstreetmap.org/copyright

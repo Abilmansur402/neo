@@ -1,0 +1,53 @@
+# Production overlay — used by deploy/deploy.sh:
+#   docker compose --env-file deploy/.env.production -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+services:
+  db:
+    ports: !override []          # never expose Postgres publicly
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-neo}
+
+  backend:
+    ports: !override []          # only reachable through Caddy
+    restart: unless-stopped
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4", "--proxy-headers", "--forwarded-allow-ips=*"]
+    environment:
+      NEO_DATABASE_URL: postgresql+asyncpg://neo:${POSTGRES_PASSWORD:-neo}@db:5432/neooutcome
+      NEO_ENVIRONMENT: ${NEO_ENVIRONMENT:-production}
+      NEO_SEED_DEMO_DATA: ${NEO_SEED_DEMO_DATA:-true}
+      NEO_JWT_SECRET: ${NEO_JWT_SECRET:?set NEO_JWT_SECRET in deploy/.env.production}
+      NEO_CORS_ORIGINS: '["https://${DOMAIN}","https://${DOMAIN}:${APP_PORT}"]'
+      NEO_S3_ENDPOINT: ${NEO_S3_ENDPOINT:-}
+      NEO_S3_BUCKET: ${NEO_S3_BUCKET:-}
+      NEO_S3_ACCESS_KEY: ${NEO_S3_ACCESS_KEY:-}
+      NEO_S3_SECRET_KEY: ${NEO_S3_SECRET_KEY:-}
+      NEO_S3_REGION: ${NEO_S3_REGION:-}
+      NEO_S3_PATH_STYLE: ${NEO_S3_PATH_STYLE:-true}
+
+  frontend:
+    ports: !override []
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2.8-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "${APP_PORT:-443}:${APP_PORT:-443}"
+    environment:
+      DOMAIN: ${DOMAIN:?set DOMAIN in deploy/.env.production}
+      APP_PORT: ${APP_PORT:-443}
+      ACME_EMAIL: ${ACME_EMAIL:-admin@example.com}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      backend:
+        condition: service_healthy
+      frontend:
+        condition: service_started
+
+volumes:
+  caddy_data:
+  caddy_config:

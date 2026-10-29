@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="NeoOutcome AI">
+  <title>NeoOutcome AI</title>
+  <!-- mark: a protective arc (the incubator dome) over the newborn, with the trend line that bends upward -->
+  <rect width="64" height="64" rx="16" fill="#0B2239"/>
+  <path d="M14 40a18 18 0 0 1 36 0" fill="none" stroke="#F7FBFC" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M12 44h9l4-8 5 14 5-10 3 4h14" fill="none" stroke="#2DD4BF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="32" cy="31" r="4.2" fill="#F7FBFC"/>
+</svg>

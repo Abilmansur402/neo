@@ -119,6 +119,7 @@ const STR = {
   'adm.threshold': { en: 'threshold', ru: 'порог', kz: 'шек' },
   'adm.crossed': { en: 'Above the alert threshold — senior review', ru: 'Выше порога сигнала — осмотр старшим врачом', kz: 'Сигнал шегінен жоғары — аға дәрігер қарауы' },
   'adm.factors': { en: 'Key factors (SHAP)', ru: 'Ключевые факторы (SHAP)', kz: 'Негізгі факторлар (SHAP)' },
+  'adm.factors.hint': { en: 'Compared with the average newborn in the training cohort, not with a healthy baby: grade 2 respiratory failure is below that average, so it lowers the score.', ru: 'Влияние считается относительно среднего новорождённого в обучающей выборке, а не здорового ребёнка: например, ДН 2 степени лучше среднего по выборке, поэтому снижает оценку.', kz: 'Әсер оқыту іріктемесіндегі орташа нәрестемен салыстырылады, сау баламен емес: мысалы, 2-дәрежелі ТЖ іріктеме орташасынан жақсы, сондықтан бағаны төмендетеді.' },
   'adm.warnings': { en: 'input notes', ru: 'замечаний к вводу', kz: 'енгізу ескертпесі' },
   'adm.empty': { en: 'Fill in the admission sheet and run the assessment', ru: 'Заполните лист поступления и запустите оценку', kz: 'Қабылдау парағын толтырып, бағалауды іске қосыңыз' },
   'adm.test': { en: 'Test period', ru: 'Тестовый период', kz: 'Тест кезеңі' }, 'adm.sens': { en: 'Sens. / spec.', ru: 'Чувств. / специф.', kz: 'Сезімт. / ерекш.' },

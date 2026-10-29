@@ -20,7 +20,7 @@ export function AdmissionRiskCard({ patientId }) {
   const run = async () => { setBusy(true); setErr(null); try { const r = await api.predictAdmission(form, patientId, !!patientId); setRes(r); (r.risk_band === 'high' ? sfx.alert : r.risk_band === 'elevated' ? sfx.warn : sfx.success)(); } catch (e) { setErr(e.message); sfx.error(); } finally { setBusy(false); } };
   const L = (f) => f.label[lang] || f.label.ru;
   const field = (f) => (
-    <label key={f.key} className="text-xs min-w-0"><span className="muted block truncate">{L(f)}{f.unit ? ` · ${f.unit}` : ''}</span>
+    <label key={f.key} className="text-xs min-w-0" title={L(f)}><span className="muted block leading-tight mb-1">{L(f)}{f.unit ? ` · ${f.unit}` : ''}</span>
       {f.kind === 'number' ? <input type="number" className="input px-2 py-1.5 mono" min={f.min} max={f.max} step={f.step || 1} value={form[f.key] ?? ''} onChange={(e) => set(f.key, e.target.value === '' ? '' : parseFloat(e.target.value))} />
         : <select className="px-2 py-1.5" value={form[f.key]} onChange={(e) => set(f.key, e.target.value)}>{(f.kind === 'yesno' ? [{ value: '0', label: t('no') }, { value: '1', label: t('yes') }] : f.options).map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}</select>}
     </label>
@@ -28,13 +28,14 @@ export function AdmissionRiskCard({ patientId }) {
   const v = res?.validation || info?.metrics;
   return (
     <Card title={<span className="flex items-center gap-2"><Baby size={16} />{t('adm.title')}</span>} sub={t('adm.sub')} right={<div className="flex items-center gap-2"><OriginPill kind="real">Асфендиярова · 1 105 · 2021–2025</OriginPill><button type="button" className="btn btn-primary" onClick={run} disabled={busy}>{busy ? <RefreshCw size={14} className="animate-spin" /> : <FlaskConical size={14} />}{t('adm.run')}</button></div>}>
-      <div className="grid lg:grid-cols-[1fr_300px] gap-5">
-        <div className="grid gap-3">
-          <div><div className="eyebrow mb-1.5 pb-1 border-b border-line">{t('adm.newborn')}</div><div className="grid grid-cols-3 sm:grid-cols-5 gap-2">{ADMISSION_FIELDS.filter((f) => f.group === 'newborn').map(field)}</div></div>
-          <div><div className="eyebrow mb-1.5 pb-1 border-b border-line">{t('adm.maternal')}</div><div className="grid grid-cols-3 sm:grid-cols-6 gap-2">{ADMISSION_FIELDS.filter((f) => f.group === 'maternal').map(field)}</div></div>
+      {/* minmax(0,1fr): let the form column shrink instead of pushing the result column out of the card */}
+      <div className="grid lg:grid-cols-[minmax(0,1fr)_300px] gap-5">
+        <div className="grid gap-3 content-start min-w-0">
+          <div><div className="eyebrow mb-1.5 pb-1 border-b border-line">{t('adm.newborn')}</div><div className="grid grid-cols-[repeat(auto-fill,minmax(130px,1fr))] gap-2 items-end">{ADMISSION_FIELDS.filter((f) => f.group === 'newborn').map(field)}</div></div>
+          <div><div className="eyebrow mb-1.5 pb-1 border-b border-line">{t('adm.maternal')}</div><div className="grid grid-cols-[repeat(auto-fill,minmax(130px,1fr))] gap-2 items-end">{ADMISSION_FIELDS.filter((f) => f.group === 'maternal').map(field)}</div></div>
           <p className="muted text-xs">{t('adm.codes')}</p>
         </div>
-        <div className="grid gap-3 self-start">
+        <div className="grid grid-cols-1 gap-3 self-start min-w-0">
           {err && <div className="text-xs p-2 rounded border" style={{ borderColor: '#FCA5A5', background: '#FEE2E2', color: '#C62828' }}>{err}</div>}
           {res ? (
             <>
@@ -44,7 +45,7 @@ export function AdmissionRiskCard({ patientId }) {
                 <div className="mt-2 flex items-center justify-center gap-2"><Badge tone={BAND_TONE[res.risk_band]}>{t(`adm.band.${res.risk_band}`)}</Badge><span className="mono text-xs muted">{t('adm.threshold')} {(res.operating_threshold * 100).toFixed(1)}%</span></div>
                 {res.threshold_crossed && <div className="mt-2 text-xs font-semibold flex items-center justify-center gap-1" style={{ color: '#C62828' }}><AlertTriangle size={13} />{t('adm.crossed')}</div>}
               </div>
-              <div><div className="eyebrow mb-1">{t('adm.factors')}</div><div className="grid gap-1">{res.top_factors.map((f) => <div key={f.feature} className="flex items-center gap-2 text-xs"><span className="w-20 h-1.5 rounded-full bg-line overflow-hidden shrink-0"><span className="block h-full" style={{ width: `${Math.min(100, Math.abs(f.contribution) * 120)}%`, background: f.direction === 'raises' ? '#E5484D' : '#16A34A' }} /></span><span className="truncate flex-1">{lang === 'en' && f.label_en ? f.label_en : f.label}</span><span className="mono muted">{fmtVal(f.value)}{f.unit ? ` ${f.unit}` : ''}</span><span className="mono font-semibold" style={{ color: f.direction === 'raises' ? '#C62828' : '#15803D' }}>{f.contribution > 0 ? '+' : ''}{f.contribution.toFixed(2)}</span></div>)}</div></div>
+              <div><div className="eyebrow mb-1">{t('adm.factors')}</div><div className="muted text-[11px] leading-snug mb-1.5">{t('adm.factors.hint')}</div><div className="grid grid-cols-1 gap-1">{res.top_factors.map((f) => <div key={f.feature} className="flex items-center gap-2 text-xs"><span className="w-20 h-1.5 rounded-full bg-line overflow-hidden shrink-0"><span className="block h-full" style={{ width: `${Math.min(100, Math.abs(f.contribution) * 120)}%`, background: f.direction === 'raises' ? '#E5484D' : '#16A34A' }} /></span><span className="truncate flex-1 min-w-0" title={lang === 'en' && f.label_en ? f.label_en : f.label}>{lang === 'en' && f.label_en ? f.label_en : f.label}</span><span className="mono muted">{fmtVal(f.value)}{f.unit ? ` ${f.unit}` : ''}</span><span className="mono font-semibold" style={{ color: f.direction === 'raises' ? '#C62828' : '#15803D' }}>{f.contribution > 0 ? '+' : ''}{f.contribution.toFixed(2)}</span></div>)}</div></div>
               {res.input_warnings?.length > 0 && <details className="text-xs"><summary className="muted cursor-pointer">{res.input_warnings.length} {t('adm.warnings')}</summary><ul className="mt-1 grid gap-0.5 muted list-disc pl-4">{res.input_warnings.map((w) => <li key={w}>{w}</li>)}</ul></details>}
             </>
           ) : <div className="h-40 grid place-items-center muted text-sm border border-dashed border-line-strong rounded-md text-center px-4">{t('adm.empty')}</div>}

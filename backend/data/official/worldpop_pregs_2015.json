@@ -1,0 +1,325 @@
+{
+ "total": 560814,
+ "regions": [
+  {
+   "props": {
+    "FID": 1,
+    "OBJECTID": 1,
+    "full_id": "r214834",
+    "osm_id": "214834",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Атырау облысы",
+    "name_en": "Atyrau Region",
+    "taldau": "    АТЫРАУСКАЯ ОБЛАСТЬ",
+    "Shape__Area": 266167042770.68164,
+    "Shape__Length": 4029413.84570767
+   },
+   "pregnancies": 23474
+  },
+  {
+   "props": {
+    "FID": 2,
+    "OBJECTID": 2,
+    "full_id": "r215441",
+    "osm_id": "215441",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Батыс Қазақстан облысы",
+    "name_en": "West Kazakhstan Region",
+    "taldau": "    ЗАПАДНО-КАЗАХСТАНСКАЯ ОБЛАСТЬ",
+    "Shape__Area": 363206047502.9746,
+    "Shape__Length": 3908725.5690387934
+   },
+   "pregnancies": 17290
+  },
+  {
+   "props": {
+    "FID": 3,
+    "OBJECTID": 3,
+    "full_id": "r215683",
+    "osm_id": "215683",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Ақтөбе облысы",
+    "name_en": "Aqtöbe region",
+    "taldau": "    АКТЮБИНСКАЯ ОБЛАСТЬ",
+    "Shape__Area": 688437776685.0195,
+    "Shape__Length": 5257678.010575833
+   },
+   "pregnancies": 25615
+  },
+  {
+   "props": {
+    "FID": 4,
+    "OBJECTID": 4,
+    "full_id": "r215686",
+    "osm_id": "215686",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Маңғыстау облысы",
+    "name_en": "Mangystau Region",
+    "taldau": "    МАНГИСТАУСКАЯ ОБЛАСТЬ",
+    "Shape__Area": 319496116827.45703,
+    "Shape__Length": 3688004.3323560194
+   },
+   "pregnancies": 21762
+  },
+  {
+   "props": {
+    "FID": 5,
+    "OBJECTID": 5,
+    "full_id": "r215699",
+    "osm_id": "215699",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Шығыс Қазақстан облысы",
+    "name_en": "East Kazakhstan Region",
+    "taldau": "    ВОСТОЧНО-КАЗАХСТАНСКАЯ ОБЛАСТЬ",
+    "Shape__Area": 225983947879.15234,
+    "Shape__Length": 3446206.471312659
+   },
+   "pregnancies": 9750
+  },
+  {
+   "props": {
+    "FID": 6,
+    "OBJECTID": 6,
+    "full_id": "r215718",
+    "osm_id": "215718",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Алматы облысы",
+    "name_en": "Almaty Region",
+    "taldau": "    АЛМАТИНСКАЯ ОБЛАСТЬ",
+    "Shape__Area": 204892608704.73828,
+    "Shape__Length": 3515232.6190702496
+   },
+   "pregnancies": 46900
+  },
+  {
+   "props": {
+    "FID": 7,
+    "OBJECTID": 7,
+    "full_id": "r215722",
+    "osm_id": "215722",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Жамбыл облысы",
+    "name_en": "Jambyl Region",
+    "taldau": "    ЖАМБЫЛСКАЯ ОБЛАСТЬ",
+    "Shape__Area": 282017383727.8164,
+    "Shape__Length": 3003944.5855738926
+   },
+   "pregnancies": 37991
+  },
+  {
+   "props": {
+    "FID": 8,
+    "OBJECTID": 8,
+    "full_id": "r215727",
+    "osm_id": "215727",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Қызылорда облысы",
+    "name_en": "Kyzylorda Region",
+    "taldau": "    КЫЗЫЛОРДИНСКАЯ ОБЛАСТЬ",
+    "Shape__Area": 457090305484.7383,
+    "Shape__Length": 3326976.9141129917
+   },
+   "pregnancies": 26182
+  },
+  {
+   "props": {
+    "FID": 9,
+    "OBJECTID": 9,
+    "full_id": "r215739",
+    "osm_id": "215739",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Түркістан облысы",
+    "name_en": "Turkistan Region",
+    "taldau": "    ТУРКЕСТАНСКАЯ ОБЛАСТЬ",
+    "Shape__Area": 219236930395.41016,
+    "Shape__Length": 3403819.890743262
+   },
+   "pregnancies": 71608
+  },
+  {
+   "props": {
+    "FID": 10,
+    "OBJECTID": 10,
+    "full_id": "r215743",
+    "osm_id": "215743",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Ақмола облысы",
+    "name_en": "Akmola Region",
+    "taldau": "    АКМОЛИНСКАЯ ОБЛАСТЬ",
+    "Shape__Area": 381098388131.1367,
+    "Shape__Length": 4707670.317324005
+   },
+   "pregnancies": 28800
+  },
+  {
+   "props": {
+    "FID": 11,
+    "OBJECTID": 11,
+    "full_id": "r215760",
+    "osm_id": "215760",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Солтүстік Қазақстан облысы",
+    "name_en": "North Kazakhstan Region",
+    "taldau": "    СЕВЕРО-КАЗАХСТАНСКАЯ ОБЛАСТЬ",
+    "Shape__Area": 281250046196.83203,
+    "Shape__Length": 4923125.375402575
+   },
+   "pregnancies": 12331
+  },
+  {
+   "props": {
+    "FID": 12,
+    "OBJECTID": 12,
+    "full_id": "r215772",
+    "osm_id": "215772",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Павлодар облысы",
+    "name_en": "Pavlodar Region",
+    "taldau": "    ПАВЛОДАРСКАЯ ОБЛАСТЬ",
+    "Shape__Area": 329460085571.2969,
+    "Shape__Length": 3693850.8168145474
+   },
+   "pregnancies": 20009
+  },
+  {
+   "props": {
+    "FID": 13,
+    "OBJECTID": 13,
+    "full_id": "r215776",
+    "osm_id": "215776",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Қарағанды облысы",
+    "name_en": "Karaganda Region",
+    "taldau": "    КАРАГАНДИНСКАЯ ОБЛАСТЬ",
+    "Shape__Area": 547099523677.6172,
+    "Shape__Length": 5879268.059353337
+   },
+   "pregnancies": 30394
+  },
+  {
+   "props": {
+    "FID": 14,
+    "OBJECTID": 14,
+    "full_id": "r1288730",
+    "osm_id": "1288730",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Қостанай облысы",
+    "name_en": "Kostanay Region",
+    "taldau": "    КОСТАНАЙСКАЯ ОБЛАСТЬ",
+    "Shape__Area": 508519965532.72266,
+    "Shape__Length": 5611942.101403701
+   },
+   "pregnancies": 17252
+  },
+  {
+   "props": {
+    "FID": 15,
+    "OBJECTID": 15,
+    "full_id": "r2465058",
+    "osm_id": "2465058",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Алматы",
+    "name_en": "Almaty",
+    "taldau": "    Г.АЛМАТЫ",
+    "Shape__Area": 1327316580.9726562,
+    "Shape__Length": 312458.28994733654
+   },
+   "pregnancies": 72880
+  },
+  {
+   "props": {
+    "FID": 16,
+    "OBJECTID": 16,
+    "full_id": "r3087155",
+    "osm_id": "3087155",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Астана",
+    "name_en": "Astana",
+    "taldau": "    Г.АСТАНА",
+    "Shape__Area": 2029149060.9257812,
+    "Shape__Length": 348595.19336190453
+   },
+   "pregnancies": 16858
+  },
+  {
+   "props": {
+    "FID": 17,
+    "OBJECTID": 17,
+    "full_id": "r3389772",
+    "osm_id": "3389772",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Шымкент",
+    "name_en": "Shymkent",
+    "taldau": "    Г.ШЫМКЕНТ",
+    "Shape__Area": 2140430702.1054688,
+    "Shape__Length": 303159.53910264734
+   },
+   "pregnancies": 34345
+  },
+  {
+   "props": {
+    "FID": 18,
+    "OBJECTID": 18,
+    "full_id": "r14243026",
+    "osm_id": "14243026",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Абай облысы",
+    "name_en": "Abay Region",
+    "taldau": "    ОБЛАСТЬ АБАЙ",
+    "Shape__Area": 425734900639.22266,
+    "Shape__Length": 4483679.707962095
+   },
+   "pregnancies": 15066
+  },
+  {
+   "props": {
+    "FID": 19,
+    "OBJECTID": 19,
+    "full_id": "r14312169",
+    "osm_id": "14312169",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Жетісу облысы",
+    "name_en": "Jetisu Region",
+    "taldau": "    ОБЛАСТЬ ЖЕТІСУ",
+    "Shape__Area": 240077541150.5,
+    "Shape__Length": 2920127.6233618576
+   },
+   "pregnancies": 23827
+  },
+  {
+   "props": {
+    "FID": 20,
+    "OBJECTID": 20,
+    "full_id": "r14312737",
+    "osm_id": "14312737",
+    "osm_type": "relation",
+    "boundary": "administrative",
+    "name_kk": "Ұлытау облысы",
+    "name_en": "Ulytau Region",
+    "taldau": "    ОБЛАСТЬ ҰЛЫТАУ",
+    "Shape__Area": 416392855173.71875,
+    "Shape__Length": 3351626.427296461
+   },
+   "pregnancies": 5546
+  }
+ ]
+}

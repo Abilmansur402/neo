@@ -1,0 +1,196 @@
+{
+ "national": {
+  "births": 6233,
+  "neo_deaths": 20,
+  "inf_deaths": 35,
+  "nmr": 3.63,
+  "imr": 5.99
+ },
+ "regions": [
+  {
+   "code": 10,
+   "region": "ABAY",
+   "births": 312,
+   "neo_deaths": 1,
+   "inf_deaths": 1,
+   "nmr": 1.64,
+   "imr": 1.64
+  },
+  {
+   "code": 11,
+   "region": "AKMOLA",
+   "births": 234,
+   "neo_deaths": 0,
+   "inf_deaths": 1,
+   "nmr": 0.0,
+   "imr": 1.61
+  },
+  {
+   "code": 15,
+   "region": "AKTOBE",
+   "births": 350,
+   "neo_deaths": 0,
+   "inf_deaths": 0,
+   "nmr": 0.0,
+   "imr": 0.0
+  },
+  {
+   "code": 19,
+   "region": "ALMATY",
+   "births": 320,
+   "neo_deaths": 2,
+   "inf_deaths": 3,
+   "nmr": 5.35,
+   "imr": 9.86
+  },
+  {
+   "code": 23,
+   "region": "ATYRAU",
+   "births": 397,
+   "neo_deaths": 1,
+   "inf_deaths": 3,
+   "nmr": 7.44,
+   "imr": 11.23
+  },
+  {
+   "code": 27,
+   "region": "WEST KAZAKHSTAN",
+   "births": 247,
+   "neo_deaths": 0,
+   "inf_deaths": 0,
+   "nmr": 0.0,
+   "imr": 0.0
+  },
+  {
+   "code": 31,
+   "region": "ZHAMBYL",
+   "births": 488,
+   "neo_deaths": 1,
+   "inf_deaths": 1,
+   "nmr": 1.49,
+   "imr": 1.49
+  },
+  {
+   "code": 33,
+   "region": "ZHETYSU",
+   "births": 356,
+   "neo_deaths": 1,
+   "inf_deaths": 3,
+   "nmr": 5.97,
+   "imr": 11.5
+  },
+  {
+   "code": 35,
+   "region": "KARAGANDA",
+   "births": 158,
+   "neo_deaths": 1,
+   "inf_deaths": 1,
+   "nmr": 3.88,
+   "imr": 3.88
+  },
+  {
+   "code": 39,
+   "region": "KOSTANAY",
+   "births": 236,
+   "neo_deaths": 1,
+   "inf_deaths": 1,
+   "nmr": 1.08,
+   "imr": 1.08
+  },
+  {
+   "code": 43,
+   "region": "KYZYLORDA",
+   "births": 456,
+   "neo_deaths": 2,
+   "inf_deaths": 3,
+   "nmr": 2.94,
+   "imr": 4.62
+  },
+  {
+   "code": 47,
+   "region": "MANGYSTAU",
+   "births": 253,
+   "neo_deaths": 0,
+   "inf_deaths": 1,
+   "nmr": 0.0,
+   "imr": 2.07
+  },
+  {
+   "code": 55,
+   "region": "PAVLODAR",
+   "births": 246,
+   "neo_deaths": 2,
+   "inf_deaths": 2,
+   "nmr": 6.85,
+   "imr": 6.85
+  },
+  {
+   "code": 59,
+   "region": "NORTH KAZAKHSTAN",
+   "births": 204,
+   "neo_deaths": 1,
+   "inf_deaths": 2,
+   "nmr": 13.46,
+   "imr": 17.1
+  },
+  {
+   "code": 61,
+   "region": "TURKISTAN",
+   "births": 497,
+   "neo_deaths": 3,
+   "inf_deaths": 4,
+   "nmr": 4.7,
+   "imr": 7.56
+  },
+  {
+   "code": 62,
+   "region": "ULYTAU",
+   "births": 383,
+   "neo_deaths": 1,
+   "inf_deaths": 2,
+   "nmr": 3.27,
+   "imr": 6.4
+  },
+  {
+   "code": 63,
+   "region": "EAST KAZAKHSTAN",
+   "births": 213,
+   "neo_deaths": 0,
+   "inf_deaths": 1,
+   "nmr": 0.0,
+   "imr": 4.46
+  },
+  {
+   "code": 71,
+   "region": "ASTANA CITY",
+   "births": 314,
+   "neo_deaths": 0,
+   "inf_deaths": 1,
+   "nmr": 0.0,
+   "imr": 3.54
+  },
+  {
+   "code": 75,
+   "region": "ALMATY CITY",
+   "births": 192,
+   "neo_deaths": 3,
+   "inf_deaths": 3,
+   "nmr": 16.67,
+   "imr": 16.67
+  },
+  {
+   "code": 79,
+   "region": "SHYMKENT CITY",
+   "births": 377,
+   "neo_deaths": 0,
+   "inf_deaths": 2,
+   "nmr": 0.0,
+   "imr": 5.3
+  }
+ ],
+ "window": "births in the 60 months before interview",
+ "weight": "wmweight",
+ "interview_years": [
+  2024
+ ]
+}

@@ -1,0 +1,12 @@
+{
+  "file": "picdb_baseline_804.csv",
+  "rows": 804,
+  "prevalence": 0.1281,
+  "sha256": "ceb4cbba6fb420b12b0ec812cdc6a7d1ecab03964fa839afa74782623f1d247f",
+  "origin": "synthetic",
+  "origin_label": "PICDB-shaped synthetic baseline (804 admissions)",
+  "description": "Generated with services.ml_engine.RiskEngine.synthetic_cohort(seed=2026) using effect sizes shaped like the Paediatric Intensive Care database (PIC v1.1.0, Zhejiang University Children's Hospital). It stands in for the credentialed PIC extract and must be replaced before clinical validation.",
+  "replace_with": "python -m ml.build_pic_cohort --pic-dir /path/to/PIC/ --out ml/baseline/picdb_baseline_804.csv",
+  "features": 31,
+  "label": "deteriorated_24h"
+}

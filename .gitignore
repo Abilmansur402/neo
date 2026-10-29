@@ -1,0 +1,9 @@
+node_modules/
+dist/
+__pycache__/
+*.pyc
+.env
+backend/artifacts/
+.DS_Store
+deploy/.env.production
+backend/data/uploads/

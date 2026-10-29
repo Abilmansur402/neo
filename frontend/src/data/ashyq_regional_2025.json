@@ -1,0 +1,801 @@
+{
+ "source": "AshyqData (official open data portal of the Ministry of Health RK) — as transcribed in the initial NeoOutcome repository",
+ "source_id": "ashyq",
+ "data_year": 2025,
+ "national": {
+  "infant_mortality": 5.85,
+  "neonatal_mortality": 3.04,
+  "hospital_beds": 105789,
+  "nursing_staff": 188470
+ },
+ "units": {
+  "infant_mortality": "per 1000 live births",
+  "neonatal_mortality": "per 1000 live births",
+  "hospital_beds": "beds",
+  "nursing_staff": "persons"
+ },
+ "regions": {
+  "abai": {
+   "ru": "Абай",
+   "infant_mortality": 5.32,
+   "neonatal_mortality": 2.68,
+   "hospital_beds": 3845,
+   "nursing_staff": 6510
+  },
+  "akmola": {
+   "ru": "Акмолинская",
+   "infant_mortality": 4.04,
+   "neonatal_mortality": 1.42,
+   "hospital_beds": 4444,
+   "nursing_staff": 5977
+  },
+  "aktobe": {
+   "ru": "Актюбинская",
+   "infant_mortality": 5.71,
+   "neonatal_mortality": 3.0,
+   "hospital_beds": 4297,
+   "nursing_staff": 9578
+  },
+  "almaty_region": {
+   "ru": "Алматинская",
+   "infant_mortality": 6.14,
+   "neonatal_mortality": 3.36,
+   "hospital_beds": 5902,
+   "nursing_staff": 10721
+  },
+  "atyrau": {
+   "ru": "Атырауская",
+   "infant_mortality": 6.46,
+   "neonatal_mortality": 4.02,
+   "hospital_beds": 2717,
+   "nursing_staff": 6241
+  },
+  "west": {
+   "ru": "Западно-Казахстанская",
+   "infant_mortality": 6.17,
+   "neonatal_mortality": 3.53,
+   "hospital_beds": 3382,
+   "nursing_staff": 7063
+  },
+  "jambyl": {
+   "ru": "Жамбылская",
+   "infant_mortality": 6.57,
+   "neonatal_mortality": 3.52,
+   "hospital_beds": 6363,
+   "nursing_staff": 12330
+  },
+  "jetisu": {
+   "ru": "Жетісу",
+   "infant_mortality": 7.13,
+   "neonatal_mortality": 4.31,
+   "hospital_beds": 4252,
+   "nursing_staff": 6475
+  },
+  "karaganda": {
+   "ru": "Карагандинская",
+   "infant_mortality": 5.31,
+   "neonatal_mortality": 2.88,
+   "hospital_beds": 7193,
+   "nursing_staff": 10672
+  },
+  "kostanay": {
+   "ru": "Костанайская",
+   "infant_mortality": 6.07,
+   "neonatal_mortality": 3.27,
+   "hospital_beds": 4600,
+   "nursing_staff": 6327
+  },
+  "kyzylorda": {
+   "ru": "Кызылординская",
+   "infant_mortality": 7.34,
+   "neonatal_mortality": 4.21,
+   "hospital_beds": 4907,
+   "nursing_staff": 10862
+  },
+  "mangystau": {
+   "ru": "Мангистауская",
+   "infant_mortality": 5.72,
+   "neonatal_mortality": 2.82,
+   "hospital_beds": 3674,
+   "nursing_staff": 7945
+  },
+  "pavlodar": {
+   "ru": "Павлодарская",
+   "infant_mortality": 5.81,
+   "neonatal_mortality": 3.19,
+   "hospital_beds": 4212,
+   "nursing_staff": 6940
+  },
+  "north": {
+   "ru": "Северо-Казахстанская",
+   "infant_mortality": 6.14,
+   "neonatal_mortality": 3.01,
+   "hospital_beds": 3212,
+   "nursing_staff": 5026
+  },
+  "turkestan": {
+   "ru": "Туркестанская",
+   "infant_mortality": 6.68,
+   "neonatal_mortality": 3.07,
+   "hospital_beds": 10448,
+   "nursing_staff": 21672
+  },
+  "ulytau": {
+   "ru": "Ұлытау",
+   "infant_mortality": 7.11,
+   "neonatal_mortality": 3.93,
+   "hospital_beds": 1445,
+   "nursing_staff": 2226
+  },
+  "east": {
+   "ru": "Восточно-Казахстанская",
+   "infant_mortality": 5.99,
+   "neonatal_mortality": 3.03,
+   "hospital_beds": 3945,
+   "nursing_staff": 7490
+  },
+  "astana": {
+   "ru": "г. Астана",
+   "infant_mortality": 4.13,
+   "neonatal_mortality": 2.19,
+   "hospital_beds": 8562,
+   "nursing_staff": 13904
+  },
+  "almaty_city": {
+   "ru": "г. Алматы",
+   "infant_mortality": 4.84,
+   "neonatal_mortality": 2.85,
+   "hospital_beds": 13252,
+   "nursing_staff": 19184
+  },
+  "shymkent": {
+   "ru": "г. Шымкент",
+   "infant_mortality": 5.41,
+   "neonatal_mortality": 2.13,
+   "hospital_beds": 5137,
+   "nursing_staff": 11327
+  }
+ },
+ "trends": {
+  "abai": [
+   {
+    "year": 2020,
+    "infant_mortality": 6.93,
+    "neonatal_mortality": 4.68
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 7.77,
+    "neonatal_mortality": 5.17
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 4.98,
+    "neonatal_mortality": 2.77
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 6.27,
+    "neonatal_mortality": 3.73
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 7.15,
+    "neonatal_mortality": 3.7
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 5.32,
+    "neonatal_mortality": 2.68
+   }
+  ],
+  "akmola": [
+   {
+    "year": 2020,
+    "infant_mortality": 6.41,
+    "neonatal_mortality": 4.0
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 5.0,
+    "neonatal_mortality": 3.35
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 5.11,
+    "neonatal_mortality": 3.11
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 5.99,
+    "neonatal_mortality": 3.12
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 5.77,
+    "neonatal_mortality": 3.19
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 4.04,
+    "neonatal_mortality": 1.42
+   }
+  ],
+  "aktobe": [
+   {
+    "year": 2020,
+    "infant_mortality": 8.4,
+    "neonatal_mortality": 5.97
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 10.21,
+    "neonatal_mortality": 6.77
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 8.5,
+    "neonatal_mortality": 5.34
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 9.47,
+    "neonatal_mortality": 4.63
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 9.64,
+    "neonatal_mortality": 5.41
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 5.71,
+    "neonatal_mortality": 3.0
+   }
+  ],
+  "almaty_region": [
+   {
+    "year": 2020,
+    "infant_mortality": 7.75,
+    "neonatal_mortality": 5.12
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 7.08,
+    "neonatal_mortality": 4.87
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 9.21,
+    "neonatal_mortality": 5.75
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 8.65,
+    "neonatal_mortality": 5.65
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 7.98,
+    "neonatal_mortality": 4.14
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 6.14,
+    "neonatal_mortality": 3.36
+   }
+  ],
+  "atyrau": [
+   {
+    "year": 2020,
+    "infant_mortality": 9.2,
+    "neonatal_mortality": 6.94
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 8.82,
+    "neonatal_mortality": 5.54
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 8.06,
+    "neonatal_mortality": 4.84
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 8.16,
+    "neonatal_mortality": 4.96
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 6.58,
+    "neonatal_mortality": 3.13
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 6.46,
+    "neonatal_mortality": 4.02
+   }
+  ],
+  "west": [
+   {
+    "year": 2020,
+    "infant_mortality": 9.18,
+    "neonatal_mortality": 6.65
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 7.56,
+    "neonatal_mortality": 5.41
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 8.44,
+    "neonatal_mortality": 5.26
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 8.17,
+    "neonatal_mortality": 4.33
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 6.55,
+    "neonatal_mortality": 3.43
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 6.17,
+    "neonatal_mortality": 3.53
+   }
+  ],
+  "jambyl": [
+   {
+    "year": 2020,
+    "infant_mortality": 6.67,
+    "neonatal_mortality": 3.77
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 7.22,
+    "neonatal_mortality": 3.87
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 7.22,
+    "neonatal_mortality": 4.04
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 7.95,
+    "neonatal_mortality": 4.06
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 7.86,
+    "neonatal_mortality": 3.68
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 6.57,
+    "neonatal_mortality": 3.52
+   }
+  ],
+  "jetisu": [
+   {
+    "year": 2020,
+    "infant_mortality": 7.0,
+    "neonatal_mortality": 4.18
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 7.44,
+    "neonatal_mortality": 5.41
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 6.66,
+    "neonatal_mortality": 5.17
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 8.4,
+    "neonatal_mortality": 5.25
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 7.54,
+    "neonatal_mortality": 4.34
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 7.13,
+    "neonatal_mortality": 4.31
+   }
+  ],
+  "karaganda": [
+   {
+    "year": 2020,
+    "infant_mortality": 7.97,
+    "neonatal_mortality": 5.0
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 8.46,
+    "neonatal_mortality": 5.29
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 7.72,
+    "neonatal_mortality": 5.06
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 6.04,
+    "neonatal_mortality": 3.79
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 5.99,
+    "neonatal_mortality": 3.19
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 5.31,
+    "neonatal_mortality": 2.88
+   }
+  ],
+  "kostanay": [
+   {
+    "year": 2020,
+    "infant_mortality": 10.31,
+    "neonatal_mortality": 6.08
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 10.34,
+    "neonatal_mortality": 7.16
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 11.16,
+    "neonatal_mortality": 6.37
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 8.99,
+    "neonatal_mortality": 4.76
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 8.73,
+    "neonatal_mortality": 4.41
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 6.07,
+    "neonatal_mortality": 3.27
+   }
+  ],
+  "kyzylorda": [
+   {
+    "year": 2020,
+    "infant_mortality": 10.64,
+    "neonatal_mortality": 6.8
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 9.44,
+    "neonatal_mortality": 5.91
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 9.4,
+    "neonatal_mortality": 5.54
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 8.45,
+    "neonatal_mortality": 4.7
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 8.58,
+    "neonatal_mortality": 4.27
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 7.34,
+    "neonatal_mortality": 4.21
+   }
+  ],
+  "mangystau": [
+   {
+    "year": 2020,
+    "infant_mortality": 8.07,
+    "neonatal_mortality": 4.97
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 9.05,
+    "neonatal_mortality": 5.61
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 8.0,
+    "neonatal_mortality": 4.45
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 8.35,
+    "neonatal_mortality": 3.8
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 6.02,
+    "neonatal_mortality": 2.95
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 5.72,
+    "neonatal_mortality": 2.82
+   }
+  ],
+  "pavlodar": [
+   {
+    "year": 2020,
+    "infant_mortality": 5.62,
+    "neonatal_mortality": 3.99
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 6.68,
+    "neonatal_mortality": 4.2
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 7.31,
+    "neonatal_mortality": 4.6
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 7.43,
+    "neonatal_mortality": 4.17
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 7.11,
+    "neonatal_mortality": 2.98
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 5.81,
+    "neonatal_mortality": 3.19
+   }
+  ],
+  "north": [
+   {
+    "year": 2020,
+    "infant_mortality": 8.73,
+    "neonatal_mortality": 6.11
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 10.1,
+    "neonatal_mortality": 6.01
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 10.73,
+    "neonatal_mortality": 6.46
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 8.53,
+    "neonatal_mortality": 5.76
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 6.74,
+    "neonatal_mortality": 3.74
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 6.14,
+    "neonatal_mortality": 3.01
+   }
+  ],
+  "turkestan": [
+   {
+    "year": 2020,
+    "infant_mortality": 7.05,
+    "neonatal_mortality": 3.56
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 7.62,
+    "neonatal_mortality": 3.65
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 8.16,
+    "neonatal_mortality": 4.45
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 8.08,
+    "neonatal_mortality": 3.62
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 7.32,
+    "neonatal_mortality": 3.05
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 6.68,
+    "neonatal_mortality": 3.07
+   }
+  ],
+  "ulytau": [
+   {
+    "year": 2020,
+    "infant_mortality": 10.24,
+    "neonatal_mortality": 5.61
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 9.26,
+    "neonatal_mortality": 5.95
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 8.29,
+    "neonatal_mortality": 6.54
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 6.5,
+    "neonatal_mortality": 2.72
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 8.82,
+    "neonatal_mortality": 3.4
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 7.11,
+    "neonatal_mortality": 3.93
+   }
+  ],
+  "east": [
+   {
+    "year": 2020,
+    "infant_mortality": 7.94,
+    "neonatal_mortality": 5.5
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 7.63,
+    "neonatal_mortality": 4.49
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 7.52,
+    "neonatal_mortality": 4.96
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 7.74,
+    "neonatal_mortality": 4.82
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 5.28,
+    "neonatal_mortality": 2.6
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 5.99,
+    "neonatal_mortality": 3.03
+   }
+  ],
+  "astana": [
+   {
+    "year": 2020,
+    "infant_mortality": 5.2,
+    "neonatal_mortality": 2.88
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 7.61,
+    "neonatal_mortality": 4.02
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 5.29,
+    "neonatal_mortality": 3.23
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 6.06,
+    "neonatal_mortality": 3.03
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 4.35,
+    "neonatal_mortality": 2.24
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 4.13,
+    "neonatal_mortality": 2.19
+   }
+  ],
+  "almaty_city": [
+   {
+    "year": 2020,
+    "infant_mortality": 7.54,
+    "neonatal_mortality": 4.81
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 10.41,
+    "neonatal_mortality": 6.03
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 5.03,
+    "neonatal_mortality": 2.91
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 5.99,
+    "neonatal_mortality": 3.69
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 5.41,
+    "neonatal_mortality": 3.06
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 4.84,
+    "neonatal_mortality": 2.85
+   }
+  ],
+  "shymkent": [
+   {
+    "year": 2020,
+    "infant_mortality": 8.02,
+    "neonatal_mortality": 4.67
+   },
+   {
+    "year": 2021,
+    "infant_mortality": 9.42,
+    "neonatal_mortality": 6.22
+   },
+   {
+    "year": 2022,
+    "infant_mortality": 7.36,
+    "neonatal_mortality": 4.41
+   },
+   {
+    "year": 2023,
+    "infant_mortality": 7.76,
+    "neonatal_mortality": 4.29
+   },
+   {
+    "year": 2024,
+    "infant_mortality": 5.39,
+    "neonatal_mortality": 2.53
+   },
+   {
+    "year": 2025,
+    "infant_mortality": 5.41,
+    "neonatal_mortality": 2.13
+   }
+  ]
+ }
+}

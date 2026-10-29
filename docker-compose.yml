@@ -1,0 +1,49 @@
+services:
+  db:
+    image: timescale/timescaledb:2.17.2-pg16
+    environment:
+      POSTGRES_USER: neo
+      POSTGRES_PASSWORD: neo
+      POSTGRES_DB: neooutcome
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U neo -d neooutcome"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    ports:
+      - "${DB_PORT:-5433}:5432"   # host port; 5433 avoids clashing with a local Postgres
+
+  backend:
+    build: ./backend
+    environment:
+      NEO_DATABASE_URL: postgresql+asyncpg://neo:neo@db:5432/neooutcome
+      NEO_JWT_SECRET: ${NEO_JWT_SECRET:-dev-only-secret-change-me}
+      NEO_ENVIRONMENT: ${NEO_ENVIRONMENT:-development}
+      NEO_SEED_DEMO_DATA: "true"
+      NEO_CORS_ORIGINS: '["http://localhost","http://localhost:5173","http://localhost:3000"]'
+    volumes:
+      - model_artifacts:/app/artifacts
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request;urllib.request.urlopen('http://localhost:8000/api/health')\""]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "${FRONTEND_PORT:-80}:80"
+
+volumes:
+  pgdata:
+  model_artifacts:

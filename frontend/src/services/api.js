@@ -45,14 +45,9 @@ export const api = {
       const hospital = mock.HOSPITALS.find((h) => h.id === hospital_id) || mock.HOSPITALS[0];
       return { access_token: null, user: { id: 'local', email, full_name, role, hospital } };
     }
-    try {
-      const r = await request('/api/auth/login/json', { method: 'POST', body: { email, password } });
-      api.setToken(r.access_token); return r;
-    } catch (e) {
-      if (e.status !== 401) throw e;
-      const r = await request('/api/auth/register', { method: 'POST', body: { email, password, full_name, role, hospital_id } });
-      api.setToken(r.access_token); return r;
-    }
+    // accounts are issued by the hospital; a wrong password must not fall through to sign-up
+    const r = await request('/api/auth/login/json', { method: 'POST', body: { email, password } });
+    api.setToken(r.access_token); return r;
   },
   async me() { return request('/api/auth/me'); },
   logout() { api.setToken(null); },

@@ -3,6 +3,8 @@
 Regional figures are an illustrative pilot extract shaped like the БНС АСПР (stat.gov.kz) and Ministry of Health
 series; every chart in the frontend cites the source it should be replaced with before external reporting.
 """
+import hashlib
+import re
 from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, Query
@@ -15,10 +17,12 @@ from models.audit_log import AuditLog
 from models.telemetry import ExpertReview, Prediction
 from models.user import Hospital, User, UserRole
 from services.ml_engine import risk_engine
+from config import get_settings
 from services import official_data
 from services.security import get_current_user, require_roles
 
 router = APIRouter(prefix="/api/analytics", tags=["analytics"])
+settings = get_settings()
 ANALYSTS = require_roles(UserRole.analyst, UserRole.admin, UserRole.researcher)
 
 # ---- 20 regions (post-2022 administrative map). lon/lat of the regional centre.
@@ -107,12 +111,32 @@ async def milestones(user: User = Depends(get_current_user)):
 
 
 # ---------------- audit & transparency ----------------
+_IDS = re.compile(r"\b(patient|prediction):([\w-]+)")
+
+
+def _pseudo(kind: str, raw: str) -> str:
+    return f"{kind}:#{hashlib.sha256(f'{settings.jwt_secret}:{raw}'.encode()).hexdigest()[:8]}"
+
+
+def _mask_ids(text: str) -> str:
+    return _IDS.sub(lambda m: _pseudo(m.group(1), m.group(2)), text or "")
+
+
+def _mask_detail(detail: dict | None) -> dict:
+    d = dict(detail or {})
+    for key in ("patient", "patient_id"):
+        if key in d and d[key]:
+            d[key] = _pseudo("patient", str(d[key]))
+    return d
+
+
 @router.get("/audit")
 async def audit_log(limit: int = Query(100, le=500), action: str | None = None, hospital_id: str | None = None, db: AsyncSession = Depends(get_db), user: User = Depends(ANALYSTS)):
     q = select(AuditLog).order_by(AuditLog.created_at.desc()).limit(limit)
     if action:
         q = q.where(AuditLog.action.like(f"{action}%"))
     rows = (await db.execute(q)).scalars().all()
+    mask = user.role != UserRole.admin
     users = {str(u.id): u for u in (await db.execute(select(User))).scalars().all()}
     hospitals = {h.id: h.name for h in (await db.execute(select(Hospital))).scalars().all()}
     out = []
@@ -121,7 +145,11 @@ async def audit_log(limit: int = Query(100, le=500), action: str | None = None, 
         hid = u.hospital_id if u else None
         if hospital_id and hid != hospital_id:
             continue
-        out.append({"id": str(r.id), "at": r.created_at, "actor": u.full_name if u else "system", "role": r.actor_role, "hospital": hospitals.get(hid, "—"), "action": r.action, "resource": r.resource, "detail": r.detail, "ip": r.ip})
+        if mask:  # analysts see who did what, but patients only as stable pseudonyms and mothers never by name
+            out.append({"id": str(r.id), "at": r.created_at, "actor": "Мама" if r.actor_role == UserRole.mother.value else (u.full_name if u else "system"), "role": r.actor_role,
+                        "hospital": hospitals.get(hid, "—"), "action": r.action, "resource": _mask_ids(r.resource), "detail": _mask_detail(r.detail), "ip": None})
+        else:
+            out.append({"id": str(r.id), "at": r.created_at, "actor": u.full_name if u else "system", "role": r.actor_role, "hospital": hospitals.get(hid, "—"), "action": r.action, "resource": r.resource, "detail": r.detail, "ip": r.ip})
     counts = (await db.execute(select(AuditLog.action, func.count()).group_by(AuditLog.action))).all()
     return {"entries": out, "by_action": {a: c for a, c in counts}}
 

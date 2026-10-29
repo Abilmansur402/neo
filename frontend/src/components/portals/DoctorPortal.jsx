@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Users, History, ClipboardCheck, ListChecks, ScanLine, Play, Pause, RefreshCw, Download, Check, X, Plus, Trash2, Bot, Baby, LayoutDashboard, ClipboardPlus, Radio, PauseCircle, FileText } from 'lucide-react';
+import { Users, History, ClipboardCheck, ListChecks, ScanLine, Play, Pause, RefreshCw, Download, Check, X, Plus, Trash2, Bot, Baby, LayoutDashboard, ClipboardPlus, Radio, PauseCircle, FileText, BookOpenCheck } from 'lucide-react';
 import WelcomeDashboard from '../doctor/WelcomeDashboard.jsx';
 import IntakePage, { AdmissionRiskCard } from '../doctor/IntakePage.jsx';
+import HandbookPage from '../doctor/HandbookPage.jsx';
+import { suggestFor } from '../../lib/situations.js';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell, CartesianGrid, AreaChart, Area, ReferenceLine, ReferenceArea } from 'recharts';
 import Shell from './Shell.jsx';
 import { Card, Badge, Gauge } from '../../lib/ui.jsx';
@@ -32,7 +34,7 @@ function fullFeatures(p) {
     base_excess: v.base_excess ?? -2, lactate: v.lactate ?? 1.8, glucose: v.glucose ?? 4.5, hemoglobin: v.hemoglobin ?? 160, wbc: v.wbc ?? 12, platelets: v.platelets ?? 220, crp: v.crp ?? 3, sodium: v.sodium ?? 138, potassium: v.potassium ?? 4.5, creatinine: v.creatinine ?? 60, bilirubin: v.bilirubin ?? 80, urine_output: v.urine_output ?? 2.5 };
 }
 
-function PatientsView({ patients, selId, setSelId, onPrediction, user }) {
+function PatientsView({ patients, selId, setSelId, onPrediction, user, onOpenSituation }) {
   const { t } = useT();
   const patient = patients.find((p) => p.id === selId) || patients[0];
   const [form, setForm] = useState(() => fullFeatures(patient));
@@ -70,6 +72,7 @@ function PatientsView({ patients, selId, setSelId, onPrediction, user }) {
             <div className={shown.risk_tier === 'critical' || shown.risk_tier === 'high' ? 'breathe-glow rounded-full' : ''} style={{ '--glow': `${TIER_COLOR[shown.risk_tier]}55` }}><Gauge pct={shown.risk_percent} color={TIER_COLOR[shown.risk_tier]} label={`${shown.risk_percent}%`} sub={`prior ${shown.base_rate_percent}%`} /></div>
             <div className="flex items-center justify-between mt-1"><TierBadge tier={shown.risk_tier} /><span className="eyebrow">{result ? 'committed' : 'preview'}</span></div>
             <div className="mt-3 text-xs grid gap-1.5 border-t border-line pt-3">{shown.recommendations.map((a) => <div key={a} className="flex gap-2"><span style={{ color: TIER_COLOR[shown.risk_tier] }}>■</span>{a}</div>)}</div>
+            {result?.shap && suggestFor(result.shap).length > 0 && <div className="mt-3 border-t border-line pt-3"><div className="eyebrow mb-1.5">{t('hb.suggest')}</div><div className="flex flex-wrap gap-1.5">{suggestFor(result.shap).map((s) => <button type="button" key={s.id} className="btn text-xs py-1 px-2" onClick={() => onOpenSituation?.(s.id)}><BookOpenCheck size={13} />{s.title}</button>)}</div></div>}
             <div className="mt-3 pt-3 border-t border-line"><ModelOriginPill prov={prov} /></div>
           </Card>
           <Card title={t('doc.shap')} sub={result ? 'Percentage points from base rate to this patient' : 'Run the assessment to see contributions'}>
@@ -173,18 +176,19 @@ function StreamStatus({ streaming, onToggle }) {
 
 export default function DoctorPortal({ user, onLogout }) {
   const { t } = useT();
-  const [view, setView] = useState('home'); const [patients, setPatients] = useState([]); const [selId, setSelId] = useState(null); const [predictions, setPredictions] = useState([]); const [streaming, setStreaming] = useState(true);
+  const [view, setView] = useState('home'); const [situation, setSituation] = useState(null); const [patients, setPatients] = useState([]); const [selId, setSelId] = useState(null); const [predictions, setPredictions] = useState([]); const [streaming, setStreaming] = useState(true);
   useEffect(() => { api.patients().then((p) => { setPatients(p); setSelId((s) => s || p[0]?.id); }); }, []);
   useEffect(() => { if (!streaming) return; const id = setInterval(() => api.patients().then(setPatients).catch(() => {}), 8000); return () => clearInterval(id); }, [streaming]);
-  const NAV = [['home', t('doc.home'), LayoutDashboard], ['patients', t('doc.patients'), Users], ['admission', t('doc.admission'), ClipboardPlus], ['timemachine', t('doc.timemachine'), History], ['queue', t('doc.queue'), ClipboardCheck], ['tasks', t('doc.tasks'), ListChecks], ['imaging', t('doc.imaging'), ScanLine]];
-  const TITLES = { home: [t('doc.home'), t('doc.home.sub')], patients: [t('doc.intake'), t('doc.intake.sub')], admission: [t('doc.admission'), t('doc.admission.sub')], timemachine: [t('doc.timemachine'), t('doc.timemachine.sub')], queue: [t('doc.queue'), t('doc.signoff.sub')], tasks: [t('doc.tasks'), t('doc.tasks.sub')], imaging: [t('doc.imaging'), 'Chest X-ray · cranial ultrasound · bedside telemetry'] };
+  const NAV = [['home', t('doc.home'), LayoutDashboard], ['patients', t('doc.patients'), Users], ['admission', t('doc.admission'), ClipboardPlus], ['timemachine', t('doc.timemachine'), History], ['queue', t('doc.queue'), ClipboardCheck], ['tasks', t('doc.tasks'), ListChecks], ['handbook', t('doc.handbook'), BookOpenCheck], ['imaging', t('doc.imaging'), ScanLine]];
+  const TITLES = { home: [t('doc.home'), t('doc.home.sub')], patients: [t('doc.intake'), t('doc.intake.sub')], admission: [t('doc.admission'), t('doc.admission.sub')], timemachine: [t('doc.timemachine'), t('doc.timemachine.sub')], queue: [t('doc.queue'), t('doc.signoff.sub')], tasks: [t('doc.tasks'), t('doc.tasks.sub')], handbook: [t('doc.handbook'), t('doc.handbook.sub')], imaging: [t('doc.imaging'), 'Chest X-ray · cranial ultrasound · bedside telemetry'] };
   const patient = patients.find((p) => p.id === selId) || patients[0];
   return (
     <Shell user={user} portalLabel={t('nav.doctor')} nav={NAV} view={view} setView={setView} title={TITLES[view][0]} sub={TITLES[view][1]} onLogout={onLogout} headerExtra={<StreamStatus streaming={streaming} onToggle={() => setStreaming((s) => !s)} />}>
       {!patient ? <div className="muted text-sm">{t('loading')}</div> : <>
         {view === 'home' && <WelcomeDashboard patients={patients} streaming={streaming} onOpenPatient={(id) => { setSelId(id); setView('patients'); }} onGoIntake={() => setView('admission')} />}
         {view === 'admission' && <IntakePage user={user} patients={patients} />}
-        {view === 'patients' && <PatientsView patients={patients} selId={patient.id} setSelId={setSelId} user={user} onPrediction={(p) => setPredictions((x) => [...x, p])} />}
+        {view === 'patients' && <PatientsView patients={patients} selId={patient.id} setSelId={setSelId} user={user} onPrediction={(p) => setPredictions((x) => [...x, p])} onOpenSituation={(id) => { setSituation(id); setView('handbook'); }} />}
+        {view === 'handbook' && <HandbookPage patients={patients} initial={situation} />}
         {view === 'timemachine' && <TimeMachine patients={patients} selId={patient.id} setSelId={setSelId} />}
         {view === 'queue' && <SignoffQueue user={user} predictions={predictions} />}
         {view === 'tasks' && <Tasks patients={patients} />}

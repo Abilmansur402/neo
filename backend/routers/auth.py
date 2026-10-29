@@ -5,10 +5,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from database import get_db
-from models.user import Hospital, User
+from models.user import Hospital, User, UserRole
 from schemas.auth import HospitalOut, LoginRequest, RegisterRequest, TokenResponse, UserOut
 from services import audit
-from services.security import create_access_token, get_current_user, hash_password, verify_password
+from services.security import create_access_token, get_current_user, hash_password, require_roles, verify_password
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
@@ -19,7 +19,8 @@ async def list_hospitals(db: AsyncSession = Depends(get_db)):
 
 
 @router.post("/register", response_model=TokenResponse, status_code=status.HTTP_201_CREATED)
-async def register(body: RegisterRequest, request: Request, db: AsyncSession = Depends(get_db)):
+async def register(body: RegisterRequest, request: Request, db: AsyncSession = Depends(get_db), admin: User = Depends(require_roles(UserRole.admin))):
+    """Accounts are issued by a hospital administrator; open sign-up would let anyone create an admin."""
     if (await db.execute(select(User).where(User.email == body.email))).scalar_one_or_none():
         raise HTTPException(status.HTTP_409_CONFLICT, "Email already registered")
     if not await db.get(Hospital, body.hospital_id):
@@ -28,7 +29,7 @@ async def register(body: RegisterRequest, request: Request, db: AsyncSession = D
     db.add(user)
     await db.flush()
     await db.refresh(user, attribute_names=["hospital"])
-    await audit.record(db, user, "auth.register", f"user:{user.id}", request=request)
+    await audit.record(db, admin, "auth.register", f"user:{user.id}", {"role": user.role.value}, request)
     await db.commit()
     token, ttl = create_access_token(user)
     return TokenResponse(access_token=token, expires_in=ttl, user=UserOut.model_validate(user))

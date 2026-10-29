@@ -28,7 +28,7 @@ from services.patient_card import (
     score_bundle,
     synthetic_patient,
 )
-from services.security import get_current_user, require_roles
+from services.security import CLINICAL, get_accessible_patient, get_current_user, require_roles
 
 router = APIRouter(prefix="/api/intake", tags=["intake"])
 CLINICIANS = require_roles(UserRole.neonatologist, UserRole.admin, UserRole.researcher)
@@ -91,10 +91,8 @@ async def card_from_bundle(body: BundleIn, user: User = Depends(get_current_user
 
 
 @router.get("/patients/{patient_id}/card.pdf")
-async def card_for_patient(patient_id: str, db: AsyncSession = Depends(get_db), user: User = Depends(CLINICIANS)):
-    p = await db.get(Patient, patient_id)
-    if not p or (user.role != UserRole.admin and p.hospital_id != user.hospital_id):
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Patient not found")
+async def card_for_patient(patient_id: str, db: AsyncSession = Depends(get_db), user: User = Depends(require_roles(*CLINICAL))):
+    p = await get_accessible_patient(db, user, patient_id)
     v = await latest_vitals(db, p.id)
     pred = (await db.execute(select(Prediction).where(Prediction.patient_id == p.id).order_by(Prediction.created_at.desc()).limit(1))).scalar_one_or_none()
     h = await db.get(Hospital, p.hospital_id)

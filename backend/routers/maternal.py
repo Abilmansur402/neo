@@ -13,7 +13,7 @@ from models.patient import Patient
 from models.user import User, UserRole
 from services import audit
 from services.maternal_risk import score
-from services.security import get_current_user, require_roles
+from services.security import get_accessible_patient, get_current_user, require_roles
 
 router = APIRouter(prefix="/api/maternal", tags=["maternal"])
 
@@ -137,8 +137,7 @@ async def baby_summary(db: AsyncSession = Depends(get_db), user: User = Depends(
 @router.post("/baby", response_model=BabyEntryOut, status_code=status.HTTP_201_CREATED)
 async def add_baby_entry(body: BabyEntryIn, request: Request, db: AsyncSession = Depends(get_db), user: User = Depends(require_roles(UserRole.neonatologist))):
     """Staff write the family-visible log."""
-    if not await db.get(Patient, body.patient_id):
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Patient not found")
+    await get_accessible_patient(db, user, body.patient_id)
     e = BabyEntry(**body.model_dump())
     db.add(e)
     await audit.record(db, user, "baby.write", f"patient:{body.patient_id}", request=request)

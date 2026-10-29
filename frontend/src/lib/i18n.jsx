@@ -54,6 +54,10 @@ const STR = {
   'doc.tasks.sub': { en: 'Your redline tracker. AI adds a task when a patient is High or Critical.', ru: 'Ваш трекер. ИИ добавляет задачу при высоком или критическом риске.', kz: 'Сіздің трекеріңіз. ЖИ жоғары немесе сыни қауіп кезінде тапсырма қосады.' },
   'doc.task.add': { en: 'Add task', ru: 'Добавить задачу', kz: 'Тапсырма қосу' },
   'doc.imaging': { en: 'Imaging', ru: 'Визуализация', kz: 'Визуализация' },
+  'doc.handbook': { en: 'Situation handbook', ru: 'Справочник ситуаций', kz: 'Жағдайлар анықтамалығы' },
+  'doc.handbook.sub': { en: 'Signs, first steps, when to call a senior — with the source for each card', ru: 'Признаки, первые шаги, когда звать старшего — с источником у каждой карточки', kz: 'Белгілер, алғашқы қадамдар, аға дәрігерді қашан шақыру — әр картада дереккөзі бар' },
+  'hb.draft': { en: 'Reference only. Short summaries of international guidelines, no doses. They do not replace the Kazakhstan MoH clinical protocol or the doctor\'s decision. Draft: a neonatologist must review and approve the text before ward use.', ru: 'Справочно. Краткие памятки по международным руководствам, без дозировок. Не заменяют клинический протокол МЗ РК и решение врача. Черновик: перед использованием в отделении текст должен проверить и утвердить неонатолог.', kz: 'Анықтама ретінде. Халықаралық нұсқаулықтар бойынша қысқа жадынама, дозасыз. ҚР ДСМ клиникалық хаттамасын және дәрігер шешімін алмастырмайды. Жоба: бөлімшеде қолданар алдында мәтінді неонатолог тексеріп, бекітуі керек.' },
+  'hb.suggest': { en: 'Handbook suggests', ru: 'Справочник подсказывает', kz: 'Анықтамалық ұсынады' },
   'doc.queue': { en: 'Sign-off queue', ru: 'Очередь на подпись', kz: 'Қол қою кезегі' },
   'tier.low': { en: 'Low', ru: 'Низкий', kz: 'Төмен' }, 'tier.moderate': { en: 'Moderate', ru: 'Умеренный', kz: 'Орташа' }, 'tier.high': { en: 'High', ru: 'Высокий', kz: 'Жоғары' }, 'tier.critical': { en: 'Critical', ru: 'Критический', kz: 'Сыни' },
   // analyst portal

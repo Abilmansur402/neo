@@ -6,12 +6,13 @@ from fastapi import Depends, HTTPException, WebSocket, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from passlib.context import CryptContext
-from sqlalchemy import select
+from sqlalchemy import false, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from config import get_settings
 from database import SessionLocal, get_db
+from models.patient import Patient
 from models.user import User, UserRole
 
 settings = get_settings()
@@ -76,3 +77,33 @@ def require_roles(*roles: UserRole):
         return user
 
     return dependency
+
+
+# Portal 1 works with patient rows; analysts (Portal 2) get aggregates only; mothers (Portal 3) use /api/maternal.
+CLINICAL = (UserRole.neonatologist, UserRole.admin)
+
+
+def can_access_patient(user: User, patient: Patient) -> bool:
+    """Single source of truth for row-level access to a patient record."""
+    if user.role == UserRole.admin:
+        return True
+    if user.role == UserRole.neonatologist:
+        return patient.hospital_id == user.hospital_id
+    return False
+
+
+def patient_scope(query, user: User):
+    """Narrow a `select(Patient)` (or a query joined to Patient) to the rows `user` may see."""
+    if user.role == UserRole.admin:
+        return query
+    if user.role == UserRole.neonatologist:
+        return query.where(Patient.hospital_id == user.hospital_id)
+    return query.where(false())
+
+
+async def get_accessible_patient(db: AsyncSession, user: User, patient_id: str) -> Patient:
+    """404 rather than 403 so a caller cannot probe which patient ids exist."""
+    p = await db.get(Patient, patient_id)
+    if not p or not can_access_patient(user, p):
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Patient not found")
+    return p

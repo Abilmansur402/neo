@@ -10,7 +10,7 @@ from models.patient import Patient
 from models.user import User
 from routers.patients import latest_vitals
 from services.cv_engine import CUS_CLASSES, CXR_CLASSES, NFCS_ITEMS, TORCH_AVAILABLE, TelemetrySynthesizer, analyze_image
-from services.security import get_current_user, get_ws_user
+from services.security import CLINICAL, can_access_patient, get_current_user, get_ws_user
 
 router = APIRouter(prefix="/api/cv", tags=["computer-vision"])
 settings = get_settings()
@@ -45,12 +45,12 @@ async def analyze(modality: str = Form(pattern="^(cxr|cus)$"), target: int | Non
 async def telemetry_ws(websocket: WebSocket, patient_id: str):
     """Streams TelemetryFrame JSON at `settings.telemetry_hz`. Auth: ?token=<jwt>."""
     user = await get_ws_user(websocket)
-    if not user:
+    if not user or user.role not in CLINICAL:
         await websocket.close(code=4401)
         return
     async with SessionLocal() as db:
         p = await db.get(Patient, patient_id)
-        if not p:
+        if not p or not can_access_patient(user, p):
             await websocket.close(code=4404)
             return
         v = await latest_vitals(db, patient_id)

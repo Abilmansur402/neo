@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Video, ScanFace, Thermometer, Eye, Upload } from 'lucide-react';
+import { drawInfant } from '../lib/infantBody.js';
 import { Card, Badge } from '../lib/ui.jsx';
 import { api } from '../services/api.js';
 import { subscribeTelemetry } from '../services/websocket.js';
@@ -31,17 +32,8 @@ function LiveStream({ patient, frameRef, thermal, tracking }) {
     const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, thermal ? '#05030F' : '#163452'); g.addColorStop(1, thermal ? '#0B0520' : '#0B2239'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
     if (!thermal) { ctx.strokeStyle = 'rgba(148,163,184,.08)'; for (let x = 0; x < W; x += 32) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); } for (let y = 0; y < H; y += 32) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); } }
     const cx = W * 0.5, cy = H * 0.52, S = H / 360; const core = ((f.surface_temps?.chest ?? 36.4) - 33.4) / 4.5;
-    const skin = (v) => (thermal ? heatColor(v) : `rgb(${Math.round(232 - cyan * 60)},${Math.round(190 - cyan * 40)},${Math.round(178 + cyan * 40)})`);
-    const parts = [
-      { x: cx + 40 * S, y: cy + 10 * S, rx: 95 * S, ry: 58 * S + breath * 3 * S, temp: core },
-      { x: cx + 150 * S, y: cy - 20 * S, rx: 55 * S, ry: 20 * S, rot: -0.4, temp: core - 0.18 }, { x: cx + 150 * S, y: cy + 50 * S, rx: 55 * S, ry: 20 * S, rot: 0.4, temp: core - 0.2 },
-      { x: cx - 10 * S, y: cy - 60 * S, rx: 42 * S, ry: 16 * S, rot: -0.9, temp: core - 0.12 }, { x: cx - 10 * S, y: cy + 80 * S, rx: 42 * S, ry: 16 * S, rot: 0.9, temp: core - 0.14 },
-      { x: cx - 95 * S, y: cy, rx: 62 * S, ry: 56 * S, temp: core + 0.05 },
-    ];
-    parts.forEach((b) => { ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(b.rot || 0); if (thermal) { const rg = ctx.createRadialGradient(0, 0, 0, 0, 0, Math.max(b.rx, b.ry)); rg.addColorStop(0, heatColor(b.temp + 0.1)); rg.addColorStop(0.7, heatColor(b.temp)); rg.addColorStop(1, heatColor(b.temp - 0.35)); ctx.fillStyle = rg; } else ctx.fillStyle = skin(b.temp); ctx.beginPath(); ctx.ellipse(0, 0, b.rx, b.ry, 0, 0, Math.PI * 2); ctx.fill(); ctx.restore(); });
+    drawInfant(ctx, { cx, cy, S, t, mode: thermal ? 'thermal' : 'rgb', breath, pulse, cyan, heat: heatColor, core });
     if (!thermal) {
-      ctx.fillStyle = '#1F2937'; [[-115, -12], [-115, 12]].forEach(([dx, dy]) => { ctx.beginPath(); ctx.ellipse(cx + dx * S, cy + dy * S, 5 * S, 3 * S, 0, 0, Math.PI * 2); ctx.fill(); });
-      ctx.strokeStyle = 'rgba(31,41,55,.7)'; ctx.lineWidth = 2 * S; ctx.beginPath(); ctx.moveTo(cx - 70 * S, cy - 8 * S); ctx.quadraticCurveTo(cx - 62 * S, cy, cx - 70 * S, cy + 8 * S); ctx.stroke();
       ctx.strokeStyle = 'rgba(226,232,240,.75)'; ctx.lineWidth = 1.5 * S; ctx.beginPath(); ctx.moveTo(cx - 90 * S, cy); ctx.lineTo(cx - 90 * S, cy - 70 * S); ctx.lineTo(cx - 160 * S, cy - 120 * S); ctx.stroke();
       ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.lineWidth = 1; [[20, -20], [60, 20]].forEach(([dx, dy]) => { ctx.beginPath(); ctx.arc(cx + dx * S, cy + dy * S, 5 * S, 0, Math.PI * 2); ctx.stroke(); ctx.beginPath(); ctx.moveTo(cx + dx * S, cy + dy * S); ctx.lineTo(cx + (dx + 40) * S, cy + (dy + 120) * S); ctx.stroke(); });
     }

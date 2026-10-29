@@ -15,7 +15,7 @@ from routers.patients import latest_vitals
 from schemas.prediction import PredictionListItem, PredictRequest, PredictResponse, ReviewCreate, ReviewOut, ShapItem
 from services import audit
 from services.ml_engine import RECOMMENDATIONS, risk_engine, tier_for
-from services.security import get_current_user, require_roles
+from services.security import CLINICAL, can_access_patient, get_accessible_patient, get_current_user, patient_scope, require_roles
 from services.shap_service import waterfall
 
 router = APIRouter(prefix="/api/predictions", tags=["predictions"])
@@ -35,10 +35,8 @@ def build_features(p: Patient, v, overrides: dict) -> dict:
 
 
 @router.post("", response_model=PredictResponse)
-async def predict(body: PredictRequest, request: Request, db: AsyncSession = Depends(get_db), user: User = Depends(require_roles(UserRole.neonatologist, UserRole.admin, UserRole.analyst, UserRole.researcher))):
-    p = await db.get(Patient, body.patient_id)
-    if not p:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Patient not found")
+async def predict(body: PredictRequest, request: Request, db: AsyncSession = Depends(get_db), user: User = Depends(require_roles(*CLINICAL))):
+    p = await get_accessible_patient(db, user, body.patient_id)
     feats = build_features(p, await latest_vitals(db, p.id), body.overrides)
     result = risk_engine.predict(feats)
     shap_rows, base_pct = waterfall(result)
@@ -63,19 +61,17 @@ async def predict(body: PredictRequest, request: Request, db: AsyncSession = Dep
 
 
 @router.get("", response_model=list[PredictionListItem])
-async def list_predictions(limit: int = 50, db: AsyncSession = Depends(get_db), user: User = Depends(get_current_user)):
-    q = select(Prediction).options(selectinload(Prediction.reviews)).join(Patient).order_by(Prediction.created_at.desc()).limit(limit)
-    if user.role not in (UserRole.admin, UserRole.analyst, UserRole.researcher):
-        q = q.where(Patient.hospital_id == user.hospital_id)
+async def list_predictions(limit: int = 50, db: AsyncSession = Depends(get_db), user: User = Depends(require_roles(*CLINICAL))):
+    q = patient_scope(select(Prediction).options(selectinload(Prediction.reviews)).join(Patient).order_by(Prediction.created_at.desc()).limit(limit), user)
     preds = (await db.execute(q)).scalars().all()
     return [PredictionListItem(id=pr.id, patient_id=pr.patient_id, risk_percent=round(pr.risk_probability * 100), risk_tier=pr.risk_tier, model_version=pr.model_version,
                                created_at=pr.created_at, review=ReviewOut.model_validate(pr.reviews[-1]) if pr.reviews else None) for pr in preds]
 
 
 @router.get("/{prediction_id}")
-async def get_prediction(prediction_id: UUID, db: AsyncSession = Depends(get_db), user: User = Depends(get_current_user)):
+async def get_prediction(prediction_id: UUID, db: AsyncSession = Depends(get_db), user: User = Depends(require_roles(*CLINICAL))):
     pr = (await db.execute(select(Prediction).options(selectinload(Prediction.reviews)).where(Prediction.id == prediction_id))).scalar_one_or_none()
-    if not pr:
+    if not pr or not can_access_patient(user, await db.get(Patient, pr.patient_id)):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Prediction not found")
     return {"id": pr.id, "patient_id": pr.patient_id, "model_version": pr.model_version, "risk_percent": round(pr.risk_probability * 100), "risk_tier": pr.risk_tier,
             "base_rate_percent": round(pr.base_value * 100), "shap": pr.shap_values, "features": pr.features, "created_at": pr.created_at,
@@ -86,7 +82,7 @@ async def get_prediction(prediction_id: UUID, db: AsyncSession = Depends(get_db)
 async def review(prediction_id: UUID, body: ReviewCreate, request: Request, db: AsyncSession = Depends(get_db), user: User = Depends(require_roles(UserRole.neonatologist))):
     """Expert review loop: only neonatologists can sign off or flag a prediction."""
     pr = await db.get(Prediction, prediction_id)
-    if not pr:
+    if not pr or not can_access_patient(user, await db.get(Patient, pr.patient_id)):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Prediction not found")
     rv = ExpertReview(prediction_id=prediction_id, reviewer_id=user.id, reviewer_name=user.full_name, status=body.status, note=body.note, observed_outcome=body.observed_outcome, confidence_flag=body.confidence_flag)
     db.add(rv)
@@ -103,12 +99,10 @@ def _r(v, nd=0):
 
 
 @router.get("/timeline/{patient_id}")
-async def timeline(patient_id: str, hours: int = 24, step_minutes: int = 60, db: AsyncSession = Depends(get_db), user: User = Depends(get_current_user)):
+async def timeline(patient_id: str, hours: int = 24, step_minutes: int = 60, db: AsyncSession = Depends(get_db), user: User = Depends(require_roles(*CLINICAL))):
     """«Машина времени»: re-score the patient at each historical vitals sample so the doctor can replay how the
     risk evolved, when the alert would have fired (first crossing of 50 %), and when deterioration was observed."""
-    p = await db.get(Patient, patient_id)
-    if not p or (user.role != UserRole.admin and user.role != UserRole.analyst and p.hospital_id != user.hospital_id):
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "Patient not found")
+    p = await get_accessible_patient(db, user, patient_id)
     since = datetime.now(timezone.utc) - timedelta(hours=hours)
     rows = (await db.execute(select(VitalSign).where(VitalSign.patient_id == patient_id, VitalSign.time >= since).order_by(VitalSign.time))).scalars().all()
     if not rows:
@@ -138,8 +132,12 @@ async def timeline(patient_id: str, hours: int = 24, step_minutes: int = 60, db:
 
 
 @router.get("/stats/review")
-async def review_stats(db: AsyncSession = Depends(get_db), user: User = Depends(get_current_user)):
-    preds = (await db.execute(select(Prediction).options(selectinload(Prediction.reviews)))).scalars().all()
+async def review_stats(db: AsyncSession = Depends(get_db), user: User = Depends(require_roles(*CLINICAL, UserRole.analyst, UserRole.researcher))):
+    """Counts only, so analysts may read it; doctors see their own hospital."""
+    q = select(Prediction).options(selectinload(Prediction.reviews)).join(Patient)
+    if user.role == UserRole.neonatologist:
+        q = patient_scope(q, user)
+    preds = (await db.execute(q)).scalars().all()
     approved = sum(1 for p in preds if p.reviews and p.reviews[-1].status == "approved")
     flagged = sum(1 for p in preds if p.reviews and p.reviews[-1].status == "flagged")
     return {"total": len(preds), "approved": approved, "flagged": flagged, "pending": len(preds) - approved - flagged, "agreement": round(approved / max(approved + flagged, 1), 3)}
@@ -174,7 +172,7 @@ async def predict_admission(body: AdmissionRequest, request: Request, db: AsyncS
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, str(exc)) from exc
     if body.persist and body.patient_id:
         p = await db.get(Patient, body.patient_id)
-        if p:
+        if p and can_access_patient(user, p):  # the what-if score is open to analysts; writing to a chart is not
             pred = Prediction(patient_id=p.id, model_version=result["model_version"], risk_probability=result["risk_probability"],
                               risk_tier=tier_for(round(result["risk_probability"] * 100)), features={k: v for k, v in body.features.items() if v is not None},
                               shap_values=result["shap_values"], base_value=result["shap_base_probability"], created_by=user.id)
